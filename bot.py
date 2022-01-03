@@ -60,7 +60,7 @@ def get_choices(choices):
 async def send_welcome(message: types.Message):
     name = message.chat.first_name
     await message.reply(f'🤖 Hello {name}\! Welcome to *Wikipedia Bot*\. '
-                        'Just send me the word you are looking for'
+                        'Just send me the word '
                         'and I will search for it on wikipedia', parse_mode='MarkdownV2', reply_markup=ReplyKeyboardRemove())
 
 
