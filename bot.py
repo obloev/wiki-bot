@@ -40,7 +40,9 @@ def get_photo(text):
         r'\[\"(https\:\/\/encrypted-tbn0\.gstatic\.com\/images\?.*?)\",\d+,\d+\]', '', str(matched_google_image_data))
     matched_google_full_resolution_images = re.findall(r"(?:'|,),\[\"(https:|http.*?)\",\d+,\d+\]",
                                                        removed_matched_google_images_thumbnails)
-    return bytes(matched_google_full_resolution_images[0], 'ascii').decode('unicode-escape')
+    photos = list(filter(lambda x: bytes(x, 'ascii').decode('unicode-escape'), matched_google_full_resolution_images[:5]))
+    photos = list(filter(lambda x: x[-5:] != '.wepg', photos))
+    return photos[0]
 
 def subscribe():
     url = InlineKeyboardButton('🔗 View channel', url=channel_join_link)
@@ -78,7 +80,7 @@ async def send_wiki(message: types.Message):
             await message.answer('❌ No articles on this topic were found', reply_markup=ReplyKeyboardRemove())
         except (MessageIsTooLong, BadRequest):
             response = wikipedia.summary(message.text, sentences=5)
-            await bot.send_photo(chat_id, caption=f'🌐 '+response[:2000],
+            await bot.send_photo(chat_id, caption=f'🌐 '+response[:1020],
                                  photo=get_photo(message.text), parse_mode='HTML', reply_markup=ReplyKeyboardRemove())
         except DisambiguationError as e:
             await message.reply("⚠️ Many articles on this topic have been found. Choose one of the following", reply_markup=get_choices(e.options))
