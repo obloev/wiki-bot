@@ -41,8 +41,8 @@ def get_photo(text):
     matched_google_full_resolution_images = re.findall(r"(?:'|,),\[\"(https:|http.*?)\",\d+,\d+\]",
                                                        removed_matched_google_images_thumbnails)
     photos = list(filter(lambda x: bytes(x, 'ascii').decode('unicode-escape'), matched_google_full_resolution_images[:5]))
-    photos = list(filter(lambda x: x[-5:] != '.wepg', photos))
-    print(photos[0], '---', photos[0][-5:])
+    photos = list(filter(lambda x: x[-5:] != '.webg', photos))
+    print(photos[0])
     return photos[0]
 
 def subscribe():
