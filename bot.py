@@ -13,7 +13,7 @@ API_TOKEN = '2035011359:AAGVyMjbyzDj7-TOaYIoiNEEQYmxmwfWmaw'
 logging.basicConfig(level=logging.INFO)
 
 bot = Bot(token=API_TOKEN)
-channel = '@ok7_bots'
+channel = '@TGBotsUsefulLinks'
 channel_join_link = 'https://t.me/+10N8yl2ChXc5NmIy'
 dp = Dispatcher(bot)
 admin = 880280670
